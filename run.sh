@@ -2,11 +2,16 @@
 
 set -beEu -o pipefail
 
+export PATH=/home/gp/mambaforge/condabin:$PATH
+
 nextflow run https://github.com/gp201/flusra.git -r 'main' -c nextflow.config -profile mamba
 
-mv output/fastq/* fastq/
+mv outputs/fastq/* fastq/
 
-mv output/metadata/*.csv metadata/SraRunTable_PRJNA1102327_automated.csv
+mv outputs/metadata/*.csv metadata/SraRunTable_PRJNA1102327_automated.csv
+
+git config --global user.email "cron@auto.com"
+git config --global user.name "Auto"
 
 git add fastq/ metadata/SraRunTable_PRJNA1102327_automated.csv
 
